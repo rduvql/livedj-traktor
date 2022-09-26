@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAKTOR_LIVE_INFO</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+    <script language="JavaScript" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+    <script language="JavaScript" src="./index.js"></script>
+
+    <style>
+        body {
+            color: #fff;
+            background-color: transparent;
+        }
+
+        .overlay-bg-red {
+            background-color: #dc3645;
+        }
+
+        .eq-bar {
+            transform: scale(1, -1) translate(0, -24px);
+            color: #fff;
+        }
+
+        .eq-bar--1 {
+            animation-name: short-eq;
+            animation-duration: 0.75s;
+            animation-iteration-count: infinite;
+            animation-delay: 0s;
+        }
+
+        .eq-bar--2 {
+            animation-name: tall-eq;
+            animation-duration: 0.75s;
+            animation-iteration-count: infinite;
+            animation-delay: 0.17s;
+        }
+
+        .eq-bar--3 {
+            animation-name: short-eq;
+            animation-duration: 0.75s;
+            animation-iteration-count: infinite;
+            animation-delay: 0.34s;
+        }
+
+        @keyframes short-eq {
+            0% { height: 8px }
+            50% { height: 4px }
+            100% { height: 8px }
+        }
+
+        @keyframes tall-eq {
+            0% { height: 16px }
+            50% { height: 6px }
+            100% { height: 16px }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="col-12">
+            <h6 id="now-playing" class="text-white overlay-bg-red w-50 text-center">NOW PLAYING</h6>
+        </div>
+    </div>
+
+
+    <div x-data="xdata" @custom.document="decks = handleChange($event.detail)">
+
+        <!-- <template x-for="_deck in Object.keys(decks).map(key => decks[key] )" :key="_deck"> -->
+        <!-- </template> -->
+
+        
+        <div class="container"
+            x-show.transition.opacity.duration.1024ms="decks.A.isPlaying">
+            <div class="row">
+                <div class="col-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <g color="#fff">
+                            <rect class="eq-bar eq-bar--1" x="4" y="4" width="4" height="8"  fill="currentcolor"/>
+                            <rect class="eq-bar eq-bar--2" x="10" y="4" width="4" height="16" fill="currentcolor" />
+                            <rect class="eq-bar eq-bar--3" x="16" y="4" width="4" height="12" fill="currentcolor" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="col-11">
+                    <h4 id="title" class="text-white" x-text="decks.A.title"></h4>
+                    <h5 id="artist" class="text-white mt-n1" x-text="decks.A.artist"></h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="container"
+            x-show.transition.opacity.duration.1024ms="decks.B.isPlaying">
+            <div class="row">
+                <div class="col-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <g color="#fff">
+                            <rect class="eq-bar eq-bar--1" x="4" y="4" width="4" height="8"  fill="currentcolor"/>
+                            <rect class="eq-bar eq-bar--2" x="10" y="4" width="4" height="16" fill="currentcolor" />
+                            <rect class="eq-bar eq-bar--3" x="16" y="4" width="4" height="12" fill="currentcolor" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="col-11">
+                    <h4 id="title" class="text-white" x-text="decks.B.title"></h4>
+                    <h5 id="artist" class="text-white mt-n1" x-text="decks.B.artist"></h5>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+
+<!-- <script language="JavaScript">
+        var windowTopBar = document.createElement('div')
+        windowTopBar.style.width = "100%"
+        windowTopBar.style.height = "100%"
+        windowTopBar.style.position = "absolute"
+        windowTopBar.style.top = windowTopBar.style.left = 0
+        windowTopBar.style.webkitAppRegion = "drag"
+        document.body.appendChild(windowTopBar);
+    </script> -->
+
+</html>
